@@ -1,0 +1,40 @@
+import java.util.*;
+
+class Solution {
+    public int[] solution(String today, String[] terms, String[] privacies) {
+        int[] answer;
+        int now = getDays(today);
+        ArrayList<Integer> list = new ArrayList<>();
+        HashMap<String, Integer> map = new HashMap<>();
+        
+        for (int i = 0; i < terms.length; i++) {
+            map.put(terms[i].split(" ")[0], Integer.parseInt(terms[i].split(" ")[1]));
+        }
+        
+        for (int i = 0; i < privacies.length; i++) {
+            String[] privacy = privacies[i].split(" ");
+            int days = getDays(privacy[0]) + (map.get(privacy[1]) * 28);
+            
+            if (days <= now) {
+                list.add(i + 1);
+                System.out.println(i + 1);
+            }
+        }
+
+        answer = new int[list.size()];
+        
+        for (int i = 0; i < list.size(); i++) {
+            answer[i] = list.get(i);
+        }
+        
+        return answer;
+    }
+    
+    public int getDays(String term) {
+        int year = Integer.parseInt(term.substring(0, 4));
+        int month = Integer.parseInt(term.substring(5, 7));
+        int day = Integer.parseInt(term.substring(8));
+        
+        return (year * 12 * 28) + (month * 28) + day;
+    }
+}
