@@ -1,0 +1,28 @@
+class Solution {
+    public String solution(String s, int n) {
+        String answer = "";
+        char[] c = new char[s.length()];
+        
+        for (int i = 0; i < s.length(); i++) {
+            c[i] = s.charAt(i);
+        }
+        
+        for (int i = 0; i < s.length(); i++) {
+            if (c[i] == ' ') continue;
+            
+            for (int j = 0; j < n; j++) {
+                if (c[i] == 'z') {
+                    c[i] = 'a';
+                    
+                } else if (c[i] == 'Z') {
+                    c[i] = 'A';
+                    
+                } else {
+                    c[i] = (char)(c[i] + 1);
+                }
+            }
+        }
+        
+        return answer = new String(c);
+    }
+}
