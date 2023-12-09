@@ -22,7 +22,7 @@ study for algorithm
 
 주 사이트: programmers, baekjoon, goorm 등
 - 현재 문제 사이트(아래)
-- 1. 프로그래머스: https://school.programmers.co.kr/learn/challenges?order=recent&levels=0%2C1%2C2&languages=java&page=1&partIds=37527%2C31236%2C25448%2C20069%2C17214%2C12286%2C9317%2C22586%2C18498%2C17931%2C300%2C3017
+- 1. 프로그래머스: https://school.programmers.co.kr/learn/challenges?order=acceptance_desc&levels=0%2C1%2C2&languages=java&page=1&partIds=37527%2C31236%2C25448%2C20069%2C17214%2C12286%2C9317%2C22586%2C18498%2C17931%2C300%2C301
 - 2. 백준(단계별로풀기, 알고리즘분류): https://www.acmicpc.net/
 
 1. 최소 공통문제 주 2회 문제 풀이를 업로드.
