@@ -1,0 +1,81 @@
+package study;
+
+import java.util.*;
+import java.io.*;
+
+public class Main {
+
+	static boolean visited[];
+	static int array[][];
+	static int node;
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+		String[] input = br.readLine().split(" ");
+		node = Integer.parseInt(input[0]);
+		int line = Integer.parseInt(input[1]);
+		int start = Integer.parseInt(input[2]);
+
+		array = new int[node + 1][node + 1];
+
+		for (int i = 0; i < line; i++) {
+			input = br.readLine().split(" ");
+			int x = Integer.parseInt(input[0]);
+			int y = Integer.parseInt(input[1]);
+			array[x][y] = array[y][x] = 1;
+		}
+
+		visited = new boolean[node + 1];
+		dfs(start);
+
+		System.out.println();
+
+		visited = new boolean[node + 1];
+		bfs(start);
+
+	}
+
+	public static void dfs(int start) {
+
+		Stack<Integer> stack = new Stack<>();
+		stack.add(start);
+
+		while (!stack.isEmpty()) {
+			int current = stack.pop();
+
+			if (visited[current])
+				continue;
+			else
+				visited[current] = true;
+
+			System.out.print(current);
+			for (int i = node; i > 0; i--) {
+				if (array[current][i] == 1 && !visited[i]) {
+					stack.add(i);
+				}
+			}
+			System.out.print(" ");
+		}
+	}
+
+	public static void bfs(int start) {
+		visited[start] = true;
+
+		Queue<Integer> queue = new LinkedList<>();
+		queue.add(start);
+
+		while (!queue.isEmpty()) {
+
+			int current = queue.poll();
+			System.out.print(current);
+			for (int i = 1; i < node + 1; i++) {
+				if (array[current][i] == 1 && !visited[i]) {
+					visited[i] = true;
+					queue.add(i);
+				}
+			}
+			System.out.print(" ");
+		}
+	}
+}
