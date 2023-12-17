@@ -1,0 +1,49 @@
+import java.util.*;
+
+class Solution {
+    static int[][] matrix;
+    static boolean[][] visited;
+    static int n, m;
+    
+    public int solution(int[][] maps) {
+        int answer = 0;
+        n = maps.length;
+        m = maps[0].length;
+        matrix = maps;
+        visited = new boolean[n][m];
+        
+        answer = bfs(0, 0);
+        
+        return answer;
+    }
+
+    public int bfs(int startY, int startX) {
+        Queue<int[]> q = new LinkedList<>();
+        q.add(new int[] {startY, startX, 1});
+        visited[startY][startX] = true;
+        
+        int[] dy = {-1, 1, 0, 0};
+        int[] dx = {0, 0, -1, 1};
+        
+        while (!q.isEmpty()) {
+            int[] now = q.poll();
+            
+            if (now[0] == n - 1 && now[1] == m - 1) 
+                return now[2]; 
+            
+            for (int i = 0; i < 4; i++) {
+                int y = now[0] + dy[i];
+                int x = now[1] + dx[i];
+                
+                if (0 <= y && y < n && 0 <= x && x < m) {
+                    if (matrix[y][x] == 1 && !visited[y][x]) {
+                        q.add(new int[] {y, x, now[2] + 1});
+                        visited[y][x] = true;
+                    }
+                }
+            }
+        }
+        
+        return -1;
+    }
+}
