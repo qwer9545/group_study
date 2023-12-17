@@ -1,0 +1,47 @@
+import java.util.*;
+
+class Solution {
+    static Map<String, Integer> map = new HashMap<>();
+    
+	public int solution(int cacheSize, String[] cities) {
+		int answer = 0;
+		int len = cities.length;
+
+		// LRU: 가장 오래 전에 참조된 데이터 삭제
+		for (int i = 0; i < len; i++) {
+            String now = cities[i].toUpperCase();
+
+			// map size > cache size일 경우 맵 내 LRU 제거
+			if (map.size() > cacheSize)
+                findLRU(map);
+			
+			// 해당 데이터가 캐시에 있는지 확인
+			// 있으면 cache hit, 해당 데이터 value 현 i로 업데이트
+			if (map.containsKey(now)) {
+				map.put(now, i);
+				answer += 1;
+                
+			} else { // 없으면 cache miss 캐시에 등록
+				System.out.println();
+				map.put(now, i);
+				answer += 5;
+			}
+		}
+		
+		return answer;
+	}
+
+	public void findLRU(Map<String, Integer> map) {
+		int min = Integer.MAX_VALUE;
+		String minKey = "";
+
+		for (String k : map.keySet()) {
+			if (map.get(k) < min) {
+				min = map.get(k);
+				minKey = k;
+			}
+		}
+
+		map.remove(minKey);
+	}
+}
