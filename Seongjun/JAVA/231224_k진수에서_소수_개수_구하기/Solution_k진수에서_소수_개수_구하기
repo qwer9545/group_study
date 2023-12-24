@@ -1,0 +1,49 @@
+class Solution {
+    public int solution(int n, int k) {
+        int answer = -1;
+		String str = "";
+
+		// k진수 변환
+		str = transfer(n, k);
+
+		// 소수 개수 세고 바로 반환
+		return answer = cntPrime(str);
+	}
+
+	public static boolean isPrime(String ele) {
+		if (ele.equals("1"))
+			return false;
+
+		Long num = Long.parseLong(ele);
+
+		for (int i = 2; i <= (int)Math.sqrt(num); i++) {
+			if (num % i == 0)
+				return false;
+		}
+
+		return true;
+	}
+
+	public static int cntPrime(String str) {
+		int answer = 0;
+		String[] nums = str.split("0");
+
+		for (String ele : nums) {
+			if (!ele.equals("") && isPrime(ele))
+				answer++;
+		}
+
+		return answer;
+	}
+
+	public static String transfer(int n, int k) {
+		StringBuilder sb = new StringBuilder();
+
+		while (n > 0) {
+			sb.insert(0, n % k);
+			n = n / k;
+		}
+
+		return sb.toString();
+	}
+}
