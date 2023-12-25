@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+    public static ArrayList<String> list;
+	public static boolean[] visited;
+
+	public String[] solution(String[][] tickets) {
+		String[] answer = new String[1];
+		list = new ArrayList<>();
+		visited = new boolean[tickets.length];
+		
+		// 가능한 모든 경로 추출
+		dfs("ICN", "ICN", 0, tickets);
+
+		// 오름차순 정렬
+		Collections.sort(list);
+		
+		// 제일 앞의 요소만 반환
+		return answer = list.get(0).split(" ");
+	}
+
+	public void dfs(String now, String route, int depth, String[][] tickets) {
+		if (depth == tickets.length) {
+			list.add(route);
+			return;
+		}
+
+		for (int i = 0; i < tickets.length; i++) {
+			if (now.equals(tickets[i][0]) && !visited[i]) {
+				visited[i] = true;
+				dfs(tickets[i][1], route + " " + tickets[i][1], depth + 1, tickets);
+				visited[i] = false;
+			}
+		}
+	}
+}
