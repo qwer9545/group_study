@@ -1,0 +1,35 @@
+import java.util.*;
+
+class Solution {
+    public int[] solution(String msg) {
+        int[] answer = {};
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		ArrayList<Integer> list = new ArrayList<>();
+		int s = 0;
+		int e = 0;
+
+		for (int i = 0; i < 26; i++) {
+			map.put(String.valueOf((char) ('A' + i)), i + 1);
+		}
+		while (true) {
+			if (e == msg.length()) {
+				list.add(map.get(msg.substring(s, e)));
+				break;
+			}
+			for (; e < msg.length(); e++) {
+				if (!map.containsKey(msg.substring(s, e + 1))) {
+					map.put(msg.substring(s, e + 1), map.size() + 1);
+					list.add(map.get(msg.substring(s, e)));
+					s = e;
+					break;
+				}
+			}
+		}
+		answer = new int[list.size()];
+		for (int i = 0; i < list.size(); i++) {
+			answer[i] = list.get(i);
+		}
+
+		return answer;
+    }
+}
